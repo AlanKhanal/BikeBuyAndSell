@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MashWebApplication.Models;
+using MashWebApplication.AppDbContext;
 namespace MashWebApplication.Controllers
 {
     public class MakeController : Controller
     {
-        [Route("make")]
+        /*[Route("make")]
         [Route("make/bike")]
 
         public IActionResult Bikes()
@@ -19,6 +20,18 @@ namespace MashWebApplication.Controllers
         public IActionResult ByYearMonth(int year,int month)
         {
             return Content(year+";"+month);
+        }*/
+
+        private readonly MashDbContext _db;
+
+        public MakeController(MashDbContext db)
+        {
+            _db = db;
         }
+        public IActionResult Index()
+        {
+            return View(_db.Makes.ToList());
+        }
+
     }
 }
