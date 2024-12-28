@@ -17,7 +17,7 @@
     </div>
 
     <br />
-    <div>
+    <div class="col-12">
         <table class="table table-striped border">
             <tr class="table-info">
                 <th>
@@ -31,9 +31,15 @@
                     <td>
                         @Html.DisplayFor(m=>item.Name)
                     </td>
-                    <td>
-                        Edit | Delete
+                    <td class="text-right">
+                        <div class="btn-group" role="group">
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = item.Id })">Edit</a>
+                            <form method="post" action="Delete">
+                                <input onclick="if(!confirm('Are you sure')){return false}" type="submit" class="btn btn-danger" value="Delete" asp-route-id="@item.Id" asp-action="Delete"/>
+                            </form>
+                        </div>
                     </td>
+                    
                 </tr>
             }
         </table>

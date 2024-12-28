@@ -52,5 +52,18 @@ namespace MashWebApplication.Controllers
             }
             return View(make);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var make = _db.Makes.Find(id);
+            if (make==null)
+            {
+                return NotFound();
+            }
+            _db.Makes.Remove(make);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
