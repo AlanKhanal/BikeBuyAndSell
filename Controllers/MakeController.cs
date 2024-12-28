@@ -28,10 +28,29 @@ namespace MashWebApplication.Controllers
         {
             _db = db;
         }
+
         public IActionResult Index()
         {
             return View(_db.Makes.ToList());
         }
 
+        //HTTP GET METHOD
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //HTTP POST METHOD
+        [HttpPost]
+        public IActionResult Create(Make make)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(make);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(make);
+        }
     }
 }
